@@ -1,0 +1,148 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'duplicate/css/main.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class='box'>
+        <div class="section-title">
+            <h2>
+                {% if clf_type == 'key' %}
+                Step 2
+                {% elif clf_type == 'aut' %}
+                Step 3
+                {% endif %}
+            </h2>
+            <h3>Remove Duplicates</h3>
+        </div>  
+        <div>
+            <form action="duplicate" method="post"> 
+                {% csrf_token %}                     
+                <input type="hidden" name= 'clf_type' value="{{clf_type}}">
+                <input type="hidden" name= 'classifier_name' value="{{classifier_name}}">
+                <input type="hidden" name= 'built_in' value="{{built_in}}">
+                <div class='loading_search'>
+                    <button class="btn btn-success search" name='search' type='submit'>Search for Duplicates</button>
+                </div>
+            </form>
+        </div>   
+        <div>   
+            {% if removed is True %}
+                <script> toastr.success('Duplicates were removed successfully') </script>
+            {% elif count == 0 %}
+                <script> toastr.success('No Duplicates Found') </script>       
+            {% elif count > 0 and remove is not True  %} 
+                <hr>
+                <form action="duplicate" method="post"> 
+                    {% csrf_token %} 
+                        {% for list in duplicates%}
+                            <p>{{list|length}} duplicate(s) were found. Please remove {{list|length|add:"-1"}}</p>
+                            {% for file in list%} 
+                                <input type='checkbox' name= 'selected_files' value='{{file}}'>
+                                <a href='{{path}}{{file}}'  target="_blank">{{file}}</a><br> 
+                            {% endfor %}                            
+                            <hr>
+                        {% endfor %}
+                       
+
+                    <input type="hidden" name= 'clf_type' value="{{clf_type}}">
+                    <input type="hidden" name= 'classifier_name' value="{{classifier_name}}">
+                    <input type="hidden" name= 'built_in' value="{{built_in}}">
+                    <input type="hidden" name= 'true_duplicates' value="{{true_duplicates}}">
+                    <input type="hidden" name= 'count' value="{{count}}">
+                    <div class='loading_remove'>
+                        <button class="btn btn-success remove" name='remove_selected' type='submit'>Remove selected Documents</button>
+                        <button class="btn btn-success remove" name='remove' type='submit'>Remove Duplicates</button>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+        <div class="next">
+            <span>        
+                {% if clf_type == 'aut' %}
+                    {% if classifier_name is None %}
+                        <a href='/keyword_based/upload?prev=True&clf_type=aut'>
+                            <button class="btn btn-primary btn-next">
+                                <i class="bi bi-arrow-left-circle"></i>  
+                                Previous                         
+                            </button>
+                        </a>
+                    {% else %}
+                        <a href='/keyword_based/upload?prev=True&clf_type=aut&classifier_name={{classifier_name}}&built_in={{built_in}}'>
+                            <button class="btn btn-primary btn-next">
+                                <i class="bi bi-arrow-left-circle"></i>  
+                                Previous                         
+                            </button>
+                        </a>
+                    {% endif %}
+                {% endif %}
+                {% if clf_type == 'key' %}    
+                    <a href='/keyword_based/upload?prev=True&clf_type=key'>
+                        <button class="btn btn-primary btn-next">
+                            <i class="bi bi-arrow-left-circle"></i>  
+                            Previous                         
+                        </button>
+                    </a>
+                {% endif %}
+            </span>
+            <span>
+                {% if clf_type == 'key' %}
+                <a href='/keyword_based/keyword_based'>
+                    <button class="btn btn-primary btn-next">
+                        <i class="bi bi-arrow-right-circle"></i> 
+                        {% if count > 0 and removed is not True%}
+                            Skip
+                        {% else %}
+                            Proceed
+                        {% endif %}
+                    </button>
+                </a>
+                {%elif clf_type == 'aut' %}
+                    <a href='/automated/automated_classify?clf_type=aut&classifier_name={{classifier_name}}&built_in={{built_in}}'>
+                        <button class="btn btn-primary btn-next">
+                            <i class="bi bi-arrow-right-circle"></i> 
+                            {% if count > 0 and removed is not True%}
+                                Skip
+                            {% else %}
+                                Proceed
+                            {% endif %}
+                        </button>
+                    </a>
+                {% endif %}
+            </span>
+        </div>
+        
+        
+    
+    </div>
+    
+    
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.search').on('click', function(e){
+            var image = new Image();
+            image.src = "{% static 'keyword_based/images/loading.gif' %}";
+            image.height = '100';
+            image.width = '100';
+            $(".loading_search").append(image)
+            $(".loading_search").append('This will take a moment')
+        });
+        $('.remove').on('click', function(e){
+            var image = new Image();
+            image.src = "{% static 'keyword_based/images/loading.gif' %}";
+            image.height = '100';
+            image.width = '100';
+            $(".loading_remove").append(image)
+            $(".loading_remove").append('This will take a moment')
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,190 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'upload/css/main.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% if uploaded_count > 0 %}
+    <script> toastr.success('{{uploaded_count}} Files uploaded Successfully') </script>
+{% endif %}
+
+<div class="container">    
+    <section id ="steps" class="services hidden"> 
+        <h2>Keyword Based Classifiation</h2> 
+        <p>
+            Keyword Based Classifier allows to categorize documents based on important keywords provided. 
+            This is more suitable if important and unique terms regading the documents is known. 
+            Important keywords can be specified alone with corresponding classes to classify. Just in 4 steps your classified directories are in your hands.
+        </p>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 1</h2><h5>Upload Documents</h5></div>
+                    <p class="description">First step is uploading documents to be classified. There are two option to select documents.
+                        Entire folder can be selected using 'Select Folder' Option Multiple files can be selected using 'Select Files' option</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 2</h2><h5>Remove Duplicates</h5></div>
+                    <p class="description">All the duplicates will be visible. Duplicates can be removed in one click.</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 3</h2><h5>Define Categories</h5></div>
+                    <p class="description">Third step is to define all the categories in which the documents should be classified and keywords 
+                        should be provided for each category to uniquely identify the files. Then classification can be started. System will perform a keyword based classification.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 4</h2><h5>Download</h5></div>
+                    <p class="description">User will be able to have look at the classified documents and download as required.</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="next">
+            <button type="button" class="btn btn-success start" onclick="show_step1()">Get Started</button>
+        </div>
+    </section><br>
+    <div id="step1" class='box hidden'>
+        <div class="section-title">
+            <h2>
+                {% if clf_type == 'key' %}
+                Step 1
+                {% elif clf_type == 'aut' %}
+                Step 2
+                {% endif %}
+            </h2>
+            <h3>Upload Documents</h3>
+        </div>
+        <div>This application supports multiple document types<b>(scanned and searchable pdfs, .docx, 
+            .xlsx, . pptx, .csv, .jpg, .png, .tiff, .gif, and .txt)</b>. You can use any document type mentioned 
+            for the classification process. </div><br>
+        <form action="upload" class="form-horizontal" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label><b>Select Folder</b></label> 
+                <input type="file" name="folder" class="form-control" webkitdirectory required>
+            </div>
+            <div class="form-group">
+                <label><b>Select Files</b></label> 
+                <input type="file" name="files" class="form-control" multiple required>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="checkbox" checked required>
+                I agree to the processing of my personal data by uploading documents via this form. 
+                I have been informed that, I have the right to access my data, download or delete from the server<br><br>
+            </div>
+            <div class="form-group loading">
+                {% if folder_exists is False %}
+                    <button class="btn btn-success" name='upload' type='submit' value='upload'>Upload Files</button>
+                {% elif folder_exists is True %}
+                    <button class="btn btn-success" name='upload' type='submit' value='upload'>Remove and Upload</button>
+                    <button class="btn btn-success" name='upload' type='submit' value='append'>Append</button>
+                {% endif %}   
+            </div>        
+            <input type="hidden" name= 'clf_type' value="{{clf_type}}">
+            <input type="hidden" name= 'classifier_name' value="{{classifier_name}}">
+            <input type="hidden" name= 'built_in' value="{{built_in}}">
+        </form>
+        <div class="next">
+            {% if clf_type == 'aut' %}
+                {% if classifier_name is None %}
+                    <span>            
+                        <a href='/automated/pre_trained'>
+                            <button class="btn btn-primary btn-next">
+                                <i class="bi bi-arrow-left-circle"></i>  
+                                Previous                         
+                            </button>
+                        </a>
+                    </span>
+                {% else %}
+                    <span>            
+                        <a href='/keyword_based/upload?clf_type={{clf_type}}'>
+                            <button class="btn btn-primary btn-next">
+                                <i class="bi bi-arrow-left-circle"></i>  
+                                Previous                         
+                            </button>
+                        </a>
+                    </span>
+                {% endif%}
+            {% endif %}
+            {% if clf_type == 'key' %} 
+                <span>            
+                    <a href='/keyword_based/upload?clf_type={{clf_type}}'>
+                        <button class="btn btn-primary btn-next">
+                            <i class="bi bi-arrow-left-circle"></i>  
+                            Previous                         
+                        </button>
+                    </a>
+                </span>
+            {% endif %}          
+            {% if folder_exists is True %}
+                <span>
+                    <a href='/keyword_based/duplicate?clf_type={{clf_type}}&classifier_name={{classifier_name}}&built_in={{built_in}}'>
+                        <button class="btn btn-primary btn-next">
+                            <i class="bi bi-arrow-right-circle"></i>  
+                            Proceed
+                        </button>
+                    </a>
+                </span>
+            {% endif %}
+        </div>    
+    </div>        
+</div>
+
+
+<script>
+    var steps = document.getElementById("steps");
+    var step1 = document.getElementById("step1");
+
+    // either one of the 2 fields should be filled
+    jQuery(function ($) {
+        var $inputs = $('input[name=folder],input[name=files]');
+        $inputs.on('input', function () {
+            // Set the required property of the other input to false if this input is not empty.
+            $inputs.not(this).prop('required', !$(this).val().length);
+        });
+    });
+    $(document).ready(function() {
+        //Hide div when the page is loaded
+        var uploaded = "{{uploaded}}";
+        var prev = "{{prev}}";
+        var clf_type = "{{clf_type}}";
+        if (uploaded == 'True' || prev == 'True' || clf_type=='aut'){
+            step1.style.display = "block";
+        }
+        else{
+            steps.style.display = "block";
+        }
+
+        $("form").on('submit', function(e){
+            var image = new Image();
+            image.src = "{% static 'keyword_based/images/loading.gif' %}";
+            image.height = '100';
+            image.width = '100';
+            $(".loading").append(image)
+            $(".loading").append('Uploading files')
+        });
+        
+    });
+    function show_step1() {
+        steps.style.display = "none";
+        step1.style.display = "block";
+      }
+</script>
+
+
+{% endblock %}

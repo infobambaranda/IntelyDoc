@@ -1,0 +1,44 @@
+input[type=file] {
+    margin: 5px 5px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    width: 50% !important;  
+}
+
+button {
+    border-radius: 1.25rem !important;
+    padding: 7px 30px 7px 30px !important;
+}
+
+.start{
+    background-color: #f16907 !important;
+    border-color: #f16907 !important;
+}
+.box{
+    border-style: outset;
+    border-radius: 30px;
+    padding: 25px 25px 25px 25px;
+    margin: auto;
+    width: 70%;
+}
+
+.next{
+    text-align:right;
+}
+.btn-next{
+    padding: 7px 30px 7px 30px !important;
+}
+.section-title {
+    padding-bottom: 15px;
+}
+.services .icon-box {
+    background: #efe5dd;
+}
+
+section {
+    padding: 40px 0;
+}
+
+.hidden{
+    display:none;
+}

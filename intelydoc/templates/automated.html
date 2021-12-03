@@ -1,0 +1,109 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'upload/css/main.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% if uploaded_count > 0 %}
+    <script> alert('{{uploaded_count}} Files uploaded Successfully') </script>
+{% endif %}
+
+<div class="container">    
+    <section id ="steps" class="services"> 
+        <h2>Automated Classification</h2> 
+        <p>
+            Automated classification allows user to classify documents using a trained module. 
+            This is more suitable if large amount of documents present. 
+            There are two option for the user. First option is to use the <a href='/automated/pre_trained'> Pre-trained Classifier</a> which allows the user use 
+            classifiers which are available in the system. If you can't find the classifier of choice, User can go for the second option 
+            <a href='/automated/custom'>Custom Classifier</a> which allows the user to train a classification model and to use it for the classification purposes.
+            Steps for both classification are described.<br><br>
+        </p>
+
+        <div class="section-title">
+            <h2><a href='/automated/pre_trained'>Classification Using pre-trained classifer</a></h2>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 1</h2><h5>Select a Classifier</h5></div>
+                    <p class="description">First step is selecting suitable classifier from the pre-trained classifier list </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 2</h2><h5>Upload Documents</h5></div>
+                    <p class="description">upload documents to be classified. There are two option to select documents.
+                        Entire folder can be selected using 'Select Folder' Option Multiple files can be selected using 'Select Files' option</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 3</h2><h5>Remove Duplicates</h5></div>
+                    <p class="description">All the duplicates will be visible. Duplicates can be removed in one click</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 4</h2><h5>Classify and Download</h5></div>
+                    <p class="description">After removing all duplicates you can Start classsification. Once</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="next">
+            <a href='/automated/pre_trained'><button type="button" class="btn btn-success start">Get Started</button></a>
+        </div>
+        <hr><br>
+        <div class="section-title">
+            <h2><a href='/automated/custom'>Train Custom Classifer</a></h2>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 1</h2><h5>Train a Custom Classifier</h5></div>
+                    <p class="description">First step is to train teh custom classifier. Categories and the sample documents 
+                        should be uploaded to the system. So that the system will automatically train a customized modue for you. </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 2</h2><h5>Upload Documents</h5></div>
+                    <p class="description">upload documents to be classified. There are two option to select documents.
+                        Entire folder can be selected using 'Select Folder' Option Multiple files can be selected using 'Select Files' option</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 3</h2><h5>Remove Duplicates</h5></div>
+                    <p class="description">All the duplicates will be visible. Duplicates can be removed in one click</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="icon-box">
+                    <div class="section-title"><h2>Step 4</h2><h5>Classify and Download</h5></div>
+                    <p class="description">After removing all duplicates you can Start classsification. Once</p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="next">
+            <a href='/automated/custom'><button type="button" class="btn btn-success start">Get Started</button></a>
+        </div>
+    </section>      
+</div>
+
+{% endblock %}

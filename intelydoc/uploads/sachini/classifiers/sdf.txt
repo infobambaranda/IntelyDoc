@@ -1,0 +1,1 @@
+graphics/vehicles/medicine/sdf

@@ -1,0 +1,24 @@
+input[type=file] {
+    margin: 5px 5px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    width: 50% !important;  
+}
+
+button {
+    border-radius: 1.25rem !important;
+}
+
+.box{
+    border-style: outset;
+    border-radius: 30px;
+    padding: 25px 15px 25px 15px;
+    margin: auto;
+    width: 70%;
+}
+.next{
+    text-align: right;
+}
+.btn-next{
+    padding: 7px 30px 7px 30px !important;
+}

@@ -1,0 +1,236 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block head %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+{% if login == False %}
+	<script> toastr.error('Please Login First') </script>
+{% endif %}
+{% if login == 'failed' %}
+	<script> toastr.error('Invalid User Credentials') </script>
+{% endif %}
+
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+				<form method="POST" action='/accounts/login'>
+			        {% csrf_token %}
+					<div class="group">
+						<label for="username" class="label">Username</label>
+						<input name="username" type="text" class="input">
+					</div>
+					<div class="group">
+						<label for="password" class="label">Password</label>
+						<input name="password" type="password" class="input" data-type="password">
+					</div>
+					<div class="group">
+						<input id="check" type="checkbox" class="check">
+						<label for="check"><span class="icon"></span> Keep me Signed in</label>
+					</div>
+					<div class="group">
+						<input type="submit" class="button" value="Sign In">
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<a href="#forgot">Forgot Password?</a>
+					</div>
+				</form>
+			</div>
+			<div class="sign-up-htm">
+				<form method="POST" id = "signup" action='/accounts/register'>
+                    {% csrf_token %}
+					<div class="group">						
+						<div class="left">
+							<label for="first_name" class="label">First Name</label>
+							<input name="first_name" type="text" class="input" value="{{first_name}}" placeholder="First Name" required>
+						</div>
+						<div class="right">
+							<label for="last_name" class="label">Last Name</label>
+							<input name="last_name" type="text" class="input" value="{{last_name}}" placeholder="Last Name" required>
+						</div>
+					</div>
+					<div class="group">
+						<label for="email" class="label">Email Address</label>
+						<input name="email" id="email" type="email" class="input" value="{{email}}" placeholder="example@example.com" required>
+						<span id='email_msg'></span>
+					</div>
+					<div class="group">
+						<label for="username" class="label">Username</label>
+						<input name="username" id="username" type="text" class="input" value="{{username}}" placeholder="Username" required>
+						<span id='username_msg'></span>
+					</div>
+					<div class="group">
+						<label for="password1" class="label">Password</label>
+						<input name="password1" id="password1" type="password" class="input" data-type="password" required>
+						<span id='pwd1_msg'></span>
+					</div>
+					<div class="group">
+						<label for="password2" class="label">Repeat Password</label>
+						<input name="password2" id="password2" type="password" class="input" data-type="password" required>
+						<span id='pwd2_msg'></span>
+					</div>
+					<div class="group">
+						<input type="submit" class="button" value="Sign Up" id='btn'>
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<label for="tab-1"><a href="/accounts/login">Already Member?</a></label>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$( "#email" ).change(function() {
+		var email = $("#email").val();
+		var emails = "{{emails}}";
+		var count = "{{count}}";
+		count = parseInt(count)
+		var mailformat = /\S+@\S+\.\S+/;
+
+		for (let i = 0; i < count*2; i++)
+		{
+			emails = emails.replace("&#x27;", '')
+		}
+		emails = emails.replace('[', '')
+		emails = emails.replace(']', '')
+		emails = emails.replace("'", '')
+		emails = emails.split(', ')
+
+		if (! mailformat.test(email))
+		{
+			$('#email_msg').empty().append('<p style="color:#FF0000";>Invalid email</p>');
+			$("#btn").prop("disabled", true);
+		}
+		else if (emails.includes(email))
+		{
+			$('#email_msg').empty().append('<p style="color:#FF0000";>Email already taken</p>');
+			$("#btn").prop("disabled", true);
+		}
+		else
+		{
+			$('#email_msg').empty();
+			$("#btn").prop("disabled", false);
+		}
+	  });
+	  $( "#username" ).change(function() {
+		var username = $("#username").val();;
+		var usernames = "{{usernames}}";
+		var count = "{{count}}";
+		count = parseInt(count)
+
+		for (let i = 0; i < count*2; i++)
+		{
+			usernames = usernames.replace("&#x27;", '')
+		}
+		usernames = usernames.replace('[', '')
+		usernames = usernames.replace(']', '')
+		usernames = usernames.replace("'", '')
+		usernames = usernames.split(', ')
+
+		if (usernames.includes(username))
+		{
+			$('#username_msg').empty().append('<p style="color:#FF0000";>Username already taken</p>');
+			$("#btn").prop("disabled", true);
+		}
+		else
+		{
+			$('#username_msg').empty();
+			$("#btn").prop("disabled", false);
+		}
+	  });
+	$( "#password1" ).change(function() {
+		var pw1 = document.getElementById("password1");
+
+		if (!password1.value.match(/[A-Z]+/))
+		{
+			$('#pwd1_msg').empty().append('<p style="color:#FF0000";>Password should contain atleast 1 Uppercase letter </p>'); 
+			$("#btn").prop("disabled", true);
+		}
+		if (password1.value.match(/[A-Z]+/))
+		{
+			$('#pwd1_msg').empty();
+			$("#btn").prop("disabled", false);
+		}
+	  });
+	  $( "#password2" ).change(function() {
+		var pw1 = document.getElementById("password1");  
+		var pw2 = document.getElementById("password2"); 
+
+		if (pw1.value !== pw2.value)
+		{
+			$('#pwd2_msg').empty().append('<p style="color:#FF0000";>passwords does not match</p>');
+			$("#btn").prop("disabled", true);
+		}
+		else
+		{
+			$('#pwd2_msg').empty();
+			$("#btn").prop("disabled", false);
+		}
+	  });
+	/*$("#btn").click(function () { 
+		var $myForm = $('#signup');
+		if (!$myForm[0].checkValidity()) {
+			alert('dome')
+			$myForm.find(':submit').click();
+		}
+		var pw1 = document.getElementById("password1");  
+		var pw2 = document.getElementById("password2"); 
+		var email = document.getElementById("email");
+		var username = document.getElementById("username");
+		var usernames = "{{usernames}}";
+		alert(usernames)
+		usernames = usernames.replace('&#x27;', '')
+		usernames = usernames.replace('[', '')
+		usernames = usernames.replace(']', '')
+		usernames = usernames.replace("'", '')
+		usernames = usernames.replace(";", '')
+		usernames = usernames.replace("&#x27;", '')
+		usernames = usernames.split(', ')
+		alert(usernames[1])
+	
+		var emails = "{{emails}}";
+		alert(emails)
+		emails = emails.replace('&#x27', '')
+		emails = emails.replace('[', '')
+		emails = emails.replace(']', '')
+		emails = emails.replace("'", '')
+		emails = emails.replace(";", '')
+		emails = emails.split(', ')
+		alert(emails)
+	
+		if (emails.includes(email.value))
+		{
+			$('#email_msg').empty().append('<p style="color:#FF0000";>Email already taken</p>');
+			event.preventDefault();
+		}
+		if (usernames.includes(username.value))
+		{
+			$('#username_msg').empty().append('<p style="color:#FF0000";>Username already taken</p>');
+			event.preventDefault();
+		}
+		if (!password1.value.match(/[A-Z]+/))
+		{
+			$('#pwd1_msg').empty().append('<p style="color:#FF0000";>Password should contain atleast 1 Uppercase letter </p>');
+			event.preventDefault();  
+		}
+		else if(pw1.value !== pw2.value)  
+		{   
+			$('#pwd2_msg').empty().append('<p style="color:#FF0000";>password does not match</p>');
+			event.preventDefault();
+		} 
+	});*/
+</script> 
+
+{% endblock %}

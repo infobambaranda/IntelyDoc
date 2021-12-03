@@ -1,0 +1,47 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+
+{% if uploaded_count > 0 %}
+    <script> toastr.success('{{uploaded_count}} Files uploaded Successfully') </script>
+{% endif %}
+
+<section id="services" class="services">
+    <div class="container">   
+        <div id="step1" class='box'>
+            <div class="section-title">
+                <h2>Step 1</h2>
+                <h3>Select Classifier</h3>
+            </div>
+            {% for index, value in built_in_classifiers.items %}
+                <a href="/keyword_based/upload?clf_type=aut&built_in=True&classifier_name={{index}}">
+                    <div class="icon-box" data-aos="zoom-in-left">
+                        <div class="icon"><i class="bi bi-circle-square" style="color: #ff689b;"></i></div>
+                        <h4 class="title">{{index}}</h4>
+                        <p class="description" style="color:black;">{{value}}</p>
+                    </div>
+                </a>
+                <br>
+            {% endfor %}
+            
+            {% for index, value in custom_classifiers.items %}
+                <a href="/keyword_based/upload?clf_type=aut&built_in=False&classifier_name={{index}}">
+                    <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="100">
+                        <div class="icon"><i class="bi bi-circle-square" style="color: #e9bf06;"></i></div>
+                        <h4 class="title">{{index}}</h4>
+                        <p class="description" style="color:black;">{{value}}</p>
+                    </div>
+                </a>
+                <br>
+            {% endfor %}
+        </div>        
+    </div>
+</section>
+
+
+{% endblock %}

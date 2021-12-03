@@ -1,0 +1,56 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'download/css/tree.css' %}">
+    <script src="{% static 'download/js/tree.js' %}"></script>
+    <script src="{% static 'download/js/treeitem.js' %}"></script>
+    <script src="{% static 'download/js/treeitemClick.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+{% if login == False %}
+    <script> alert('Please Login First') </script>
+{% endif %}
+
+<div class="container">
+    <div class="box">
+        <div class="section-title">
+            <h2>Step 4</h2>
+            <h3>Perform Classification</h3>
+        </div>
+        <p style="color:red">CONGRATULATIONS!!!</p>
+        <P>
+            You are in the last step to perform the classication. Click the button to start Classification
+        </P>
+        
+        {% if clf_type == 'aut' %}
+            <div class='loading'>            
+                <a href='/automated/classify?classifier_name={{classifier_name}}&built_in={{built_in}}'>
+                    <button class="btn btn-success">
+                        Start Classification
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    
+    
+</div>
+<script>
+    $(document).ready(function() {
+        $('button').on('click', function(e){
+            var image = new Image();
+            image.src = "{% static 'keyword_based/images/loading.gif' %}";
+            image.height = '100';
+            image.width = '100';
+            $(".loading").append(image)
+            $(".loading").append('Classification is in progress')
+        });
+        
+    });
+</script>
+{% endblock %}

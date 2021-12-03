@@ -1,0 +1,51 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'download/css/tree.css' %}">
+    <script src="{% static 'download/js/tree.js' %}"></script>
+    <script src="{% static 'download/js/treeitem.js' %}"></script>
+    <script src="{% static 'download/js/treeitemClick.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+{% if login == False %}
+    <script> alert('Please Login First') </script>
+{% endif %}
+
+{% if classified == 'True' %}
+<script> toastr.success('Classification Successful') </script>
+{% elif classified == 'False' %}
+<script> toastr.warning('No Classification performed yet'); </script>
+{% elif classified == 'no files' %}
+<script> toastr.error('No files matching Categories') </script>
+{%endif%}
+
+<div class="container">
+    <h2 style="text-align: center;">System Reports</h2>
+    <br><br><br>
+    <table class="table" style="width: 75%;">
+        <tbody>
+          <tr>
+            <th>Classification Report</th>
+            <td><a href="/keyword_based/view_reports?report=full"><button type="button" class="btn btn-primary">View</button></a></td>
+          </tr>
+          <tr>
+            <th>Classified Documents Report</th>
+            <td><a href="/keyword_based/view_reports?report=cl"><button type="button" class="btn btn-primary">View</button></a></td>
+          </tr>
+          <tr>
+            <th>Unclassified Documents Report</th>
+            <td><a href="/keyword_based/view_reports?report=un"><button type="button" class="btn btn-primary">View</button></a></td>
+          </tr>
+          <tr>
+            <th>Category wise reort</th>
+            <td><a href="/keyword_based/view_reports?report=category"><button type="button" class="btn btn-primary">View</button></a></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'download/css/tree.css' %}">
+    <script src="{% static 'download/js/tree.js' %}"></script>
+    <script src="{% static 'download/js/treeitem.js' %}"></script>
+    <script src="{% static 'download/js/treeitemClick.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+{% if login == False %}
+    <script> alert('Please Login First') </script>
+{% endif %}
+
+<div class="container">
+    <div class="box">
+        <div class="section-title">
+            <h2>Step 4</h2>
+            <h3>Download</h3>
+        </div>
+        {% if classified == 'True' %}
+            <script> toastr.success('Classification Successful') </script>
+        {% elif classified == 'False' %}
+           <script> toastr.warning('No Classification performed yet'); </script>
+        {% elif classified == 'no files' %}
+            <script> toastr.error('No files matching Categories') </script>
+        {%endif%}
+        <ul role="tree" aria-labelledby="tree_label">
+            {% for key, value in transfer.items %}
+            {% if key == 'not_classified' %}
+            <li role="treeitem" aria-expanded="false">
+                <span>
+                    {{key}} <a href="/keyword_based/create_zip?folder_name=not_classified"><img src="{% static 'download/images/zipfile.png' %}"></a>
+                </span>
+                <ul role="group">
+                    {%for file in value %}
+                    <li role="treeitem" class="doc">
+                        <a href="{{path}}not_classified/{{file}}" target="_blank">{{file}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% elif key == 'uploaded' %}
+            <li role="treeitem" aria-expanded="false">
+                <span>
+                    {{key}} <a href="/keyword_based/create_zip?folder_name=uploaded"><img src="{% static 'download/images/zipfile.png' %}"></a>
+                </span>
+                <ul role="group">
+                    {%for file in value %}
+                    <li role="treeitem" class="doc">
+                        <a href="{{path}}uploaded/{{file}}" target="_blank">{{file}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% elif key == 'classified' %}
+            <li role="treeitem" aria-expanded="false">
+                <span>
+                    {{key}} <a href="/keyword_based/create_zip?folder_name=classified" ><img src="{% static 'download/images/zipfile.png' %}"></a>
+                </span>
+                <ul role="group">
+            {%else%} 
+                 
+                    <li role="treeitem" aria-expanded="false">
+                        <span>
+                            {{key}} <a href="/keyword_based/create_zip?folder_name=classified/{{key}}" ><img src="{% static 'download/images/zipfile.png' %}"></a>
+                        </span>
+                        <ul role="group">
+                            {%for file in value %}
+                            <li role="treeitem" class="doc">
+                                <a href="{{path}}classified/{{key}}/{{file}}" target="_blank">{{file}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                 
+            {%if forloop.counter == classified_category_count %}
+                </ul>
+            </li>
+            {%endif%}
+            {%endif%}
+            {% endfor %}
+        </ul>
+        <P>
+            This is not a permanent storage. It is strongly recommended, that all documents are cleaned up, 3 months after creation at the latest. 
+            IntelyDoc reserves the right to delete documents older than 3 months without prior notice.
+        </P>
+    </div>
+
+    
+    
+</div>
+
+{% endblock %}

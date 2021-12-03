@@ -1,0 +1,15 @@
+input[type=file] {
+    display: revert;
+    margin: 5px 5px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    width: 30% !important;  
+}
+
+input[type=text] {
+    padding: 6px 20px;
+    margin: 5px 5px;
+    box-sizing: border-box;
+    border-radius: 20px; 
+    width:293px; 
+}

@@ -1,0 +1,1 @@
+Computer Graphics/Diseases and Medicine/Vehicles/This classifier is a built-in classifier. There are 3 classes. You can classify your news documents as news related to computer graphics, news related to vehicles, and news related to diseases and medicine.

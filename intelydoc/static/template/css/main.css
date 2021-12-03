@@ -1,0 +1,77 @@
+#hero {
+    background-image: url(bgimage.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position-y: 32%;
+}
+.highlight-font{
+	background: rgba(0,0,0, 0.3) !important;
+    padding: 10px;
+}
+#hero h2 {
+    text-shadow: -1px 0 #ffffff1a, 0 1px #ffffff52, 1px 0 #ffffff78, 0 -1px white !important;
+}
+
+.welcome-txt{
+	color: #ef6603;
+	padding: 25px 15px 7px 15px;
+	font-weight: bold;
+}
+
+.cont{
+	margin-top:45px  !important;
+}
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+}
+
+button {
+    border-radius: 1.25rem !important;
+}
+body {
+    font-family: var(--bs-font-sans-serif);
+}
+
+.nav-tabs .nav-link {
+    border-radius: 20px;
+}
+
+.features .nav-link.active {
+    background: #fd8e5c;
+    color: #fff;
+    border-color: #fd8e5c;
+    border-style: inherit;
+}
+.box{
+    border-style: outset;
+    border-radius: 30px;
+    padding: 25px 15px 25px 15px;
+    margin: auto;
+    width: 70%;
+}
+.next{
+    text-align: right;
+}
+.btn-next{
+    padding: 7px 30px 7px 30px !important;
+}
+.toast {
+    opacity: 1 !important;
+  }
+  
+  #toast-container > div {
+    opacity: 1 !important; 
+  }
+  .steps{
+    margin-left:25px;
+  }
+  .descript{    
+    border-radius: 30px;
+    border: groove grey;
+    padding: 5px 20px;
+    width: 580px;
+    height: 100px;
+  }

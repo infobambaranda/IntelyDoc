@@ -1,0 +1,326 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex flex-column justify-content-end align-items-center">
+    <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <div class =" highlight-font">
+            <h2 class="animate__animated animate__fadeInDown">Welcome to <span>IntelyDoc</span></h2>
+            <p class="animate__animated fanimate__adeInUp">Leave your error prone classification to us. We wil classify all your business documents according to your business requirement. Intely to is the best solution for you</p>
+            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <div class =" highlight-font">
+            <h2 class="animate__animated animate__fadeInDown">Keyword Based Classifier</h2>
+            <p class="animate__animated animate__fadeInUp">Keyword based classifier will allow you to classify documents by extracting important keywords from the documents. Enter categories with relevant keywords, we will do the rest and provide classified docuemnts for you.</p>
+            <a href="/keyword_based/upload?clf_type=key" class="btn-get-started animate__animated animate__fadeInUp scrollto">Start Classification</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <div class =" highlight-font">
+            <h2 class="animate__animated animate__fadeInDown">Automated Classifier</h2>
+            <p class="animate__animated animate__fadeInUp">
+              This will provide you the opportunity to build your own, custom classifier. This is more suitable for huge documents set. you can creat your own classes to classify and provide sample documents for each class to train the classfier. Using this custom classifier your will be able to classify your documents easily and securely.
+            </p>
+            <a href="/keyword_based/upload?clf_type=aut" class="btn-get-started animate__animated animate__fadeInUp scrollto">Start Classification</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+
+    <!--<svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+      </defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
+      </g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
+      </g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
+      </g>
+    </svg>-->
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+          <h2>About</h2>
+          <h3>intelydoc</h3>
+        </div>
+
+        <div class="row content" data-aos="fade-up">
+          <div class="col-lg-6">
+            <p>
+              Handling a large number of documents manually is time-consuming and error-prone. IntelyDoc helps you to classify documents using 
+              the machine learning approach. This can be applied in any organization where there is a huge number of documents unclassified. 
+              IntelyDoc provides multiple classification approaches, 
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> 
+                <b>Pre-trained classifier for document classification</b>
+                User is able to use pretrained classifiers on different domains, if that matches the user requirement.User can upload documents 
+                which will be automatically classified into predefined classes
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <ul>
+              <li><i class="ri-check-double-line"></i> 
+                <b>Train a custom classifier for document classification</b>
+                User is able to train a classifier with a set of sample documents for the categories which helps user to categorize the rest 
+                of the documents automatically
+              </li>
+              <li><i class="ri-check-double-line"></i> 
+                <b>Keyword based document classification</b>
+                This approach uses important keywords in the document for the classification process. This methos is best matching if the 
+                user can identify unique keywords for each category. User can define the categories with the relevant keywords, system will 
+                automatically classify the documents.
+              </li>
+            </ul>
+            <a href="#features" class="btn-learn-more">Learn More</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+      <br>
+      <div class="container">
+
+        <ul class="nav nav-tabs row d-flex">
+          <li class="nav-item col-4" data-aos="zoom-in">
+            <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">
+              <i class="ri-gps-line"></i>
+              <h4 class="d-none d-lg-block">What is Classification?</h4>
+            </a>
+          </li>
+          <li class="nav-item col-4" data-aos="zoom-in" data-aos-delay="100">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-2">
+              <i class="ri-body-scan-line"></i>
+              <h4 class="d-none d-lg-block">Why IntelyDoc? </h4>
+            </a>
+          </li>
+          <li class="nav-item col-4" data-aos="zoom-in" data-aos-delay="200">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-3">
+              <i class="ri-sun-line"></i>
+              <h4 class="d-none d-lg-block">Getting Started</h4>
+            </a>
+          </li>
+        </ul>
+
+        <div class="tab-content" data-aos="fade-up" id="content">
+          <div class="tab-pane active show" id="tab-1">
+            <h3>What is Document Classification</h3><br>
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">                
+                <p class="fst-italic">
+                  Document classification, sometimes known as categorization, is a way of classifying, classing, or categorizing documents based 
+                  on the content within them. In essence, when a document is “captured” or comes into the business, document classification can be 
+                  used to assess the content of the document and then put a category or class against it making the document easier to store and 
+                  access.
+                </p>
+                <p class="fst-italic">
+                  Here documents are divided into user-defined categories using machine learning techniques. This can be either manual or 
+                  automated and it can be used to easily sort any document type.
+                </p>
+              </div>
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                <p class="fst-italic">
+                  Both types of document classification have their advantages and disadvantages. On the one hand, classifying documents manually 
+                  gives humans greater control over the process of classification, and they can make decisions as to which categories to use. However, 
+                  when handling large volumes of documents, the manual process would not be more efficient. In such cases, it is much faster, more 
+                  cost-efficient,  to carry out automatic document classification.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab-2">
+            <h3>Why IntelyDoc</h3><br>
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">                
+                <p>
+                  When documents enter the system,  duplicates are identified, text is extracted, documents are classified, stores based on the content 
+                  and are able to download. 
+                </p>
+                <p>
+                  IntelyDoc provides you unique and inspiring  features
+                </p>
+                <ul>
+                  <li><i class="ri-check-double-line"></i> 
+                    <b>Supports multiple file types</b>
+                    IntelyDoc supports multiple file types including .pdf, .docx, .xlsx, . pptx, .csv, .jpg, .png, .tiff, .gif, and .txt. Easily and 
+                    comprehensively scan documents of any type using OCR technology.
+                  </li>
+                  <li><i class="ri-check-double-line"></i> 
+                    <b>Supports documents with multiple pages</b>
+                    Scan multiple pages to extract content.
+                  </li>
+                  <li><i class="ri-check-double-line"></i> 
+                    <b>Process a large number of documents at a time</b>
+                    User are allowed to upload large number of documents to classify at a time. 
+                  </li>                  
+                  <li><i class="ri-check-double-line"></i> 
+                    <b>Append Documents</b>
+                    Once documents are uploaded it can be used multiple times and documents can be appended for classification.
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                <ul>
+                  <li><i class="ri-check-double-line"></i> 
+                    <b>Reduce hundreds of work hours</b>
+                    IntelyDoc is faster and reliable than manual classification of documents. It Improves the customer experience and throughput
+                     rate of your classification-heavy processes without increasing costs.
+                  </li>
+                  <li><i class="ri-check-double-line"></i> 
+                    <b>Identification of Duplicates</b>
+                    Automate the process of grouping documents with the same content to identify duplicated and allow the user to remove 
+                    documents that don’t need to be preserved, easily.
+                  </li>
+                  <li><i class="ri-check-double-line"></i> 
+                    <b>Download</b>
+                    Routes documents to the proper category based on the content and allow to be downloaded in the form of a ZIP file.
+                  </li>
+                  <li><i class="ri-check-double-line"></i> 
+                    <b>Secure</b>
+                    Documents are secured with user authentication
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab-3">
+            <h3>Getting started with IntelyDoc</h3><br>
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                <ul>
+                  <li><i class="ri-check-double-line"></i> For a successful use of the application a steady internet connection should be there. </li>
+                  <li><i class="ri-check-double-line"></i> User should first register and log into the system in order to access the main features provided by the IntelyDoc.</li>
+                  <li><i class="ri-check-double-line"></i> Once the user logged in successfully, user can select either Keyword-based classification or Automated classification according to the requirement.</li>
+                  <li><i class="ri-check-double-line"></i> If Keyword-based classification is selected user can proceed to classification with following steps.</li>
+                  <ul class='steps'>
+                    <li><i class="bi bi-dot" style="color: #f17e48;"></i>Step 1 – Upload documents to be classified</li>
+                    <li><i class="bi bi-dot" style="color: #f17e48;"></i>Step 2 – Identify duplicates and remove if necessary</li>
+                    <li><i class="bi bi-dot" style="color: #f17e48;"></i>Step 3 – Define categories with relevant keywords.</li>
+                    <li><i class="bi bi-dot" style="color: #f17e48;"></i>Step 4 – Perform classification and download classified documents.</li>
+                  </ul>
+                  <li><i class="ri-check-double-line"></i> If Automated classification is selected user have a choice to use a predefined classifier or to train a custom classifier. User can proceed to classification with following steps.</li>
+                  <ul class='steps'>
+                    <li><i class="bi bi-dot" style="color: #f17e48;"></i>Step 1 – Select a classifier or train a classifier by providing categories with sample documents</li>
+                    <li><i class="bi bi-dot" style="color: #f17e48;"></i>Step 2– Upload documents to be classified</li>
+                    <li><i class="bi bi-dot" style="color: #f17e48;"></i>Step 3 – Identify duplicates and remove if necessary</li>
+                    <li><i class="bi bi-dot" style="color: #f17e48;"></i>Step 4 – Perform classification and download classified documents.</li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+          </div>          
+        </div>
+
+      </div>
+    </section><!-- End Features Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+          <h2>Services</h2>
+          <h3>What do we offer</h3>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="icon-box" data-aos="zoom-in-left">
+              <div class="icon"><i class="bi bi-briefcase" style="color: #ff689b;"></i></div>
+              <h4 class="title"><a href="/keyword_based/upload?clf_type=key">Keyword Based Classification</a></h4>
+              <p class="description">Classify your business documents by providing important keywords and corresponding labels</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 ">
+            <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="100">
+              <div class="icon"><i class="bi bi-book" style="color: #e9bf06;"></i></div>
+              <h4 class="title"><a href="/keyword_based/upload?clf_type=aut">Automated Classification</a></h4>
+              <p class="description">Train a custom classification model by providing sample business documents and the corresponding classification labels</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+          <h2>Contact</h2>
+          <h3>Contact Us</h3>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-12" data-aos="fade-right">
+            <div class="row info">
+              <div class="col-lg-4 address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>3rd mile post, Passara Road, Ella, Sri Lanka</p>
+              </div>
+
+              <div class="col-lg-4 email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>info.bambaranda@gmail.com</p>
+              </div>
+
+              <div class="col-lg-4 phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+94 717307831</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+{% endblock %}

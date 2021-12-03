@@ -1,0 +1,77 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'download/css/tree.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% if login == False %}
+    <script> alert('Please Login First') </script>
+{% endif %}
+
+<div class="container" id="content">
+    <h2>Classification Report</h2>    
+    <b>User Name :</b> {{user_details.first_name}} {{user_details.last_name}}<br>
+    <hr>
+    <table style="width: 100%;">
+        <tr>
+            <td style="vertical-align: top;"><b>Total uploaded :</b> {{uploaded_file_count}} files</td>
+            <td>
+                <b>Successfully classified  :</b> {{total_classified}} files<br>
+                {% for key,value in classified_file_count.items %}
+                &emsp;{{key}} : {{value}} files<br>
+                {% endfor %}
+            </td>
+            <td style="vertical-align: top;"><b>Not classified :</b> {{un_classified_file_count}} files</td>
+        </tr>
+    </table> 
+    <hr>
+    
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">File Name</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">File Size</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for key, value in documents.items %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{key}}</td>
+                    {% for i in value %}
+                        {% if forloop.counter == 1 %}
+                            <td>{{i}}</td>
+                        {% elif forloop.counter == 2 %}
+                            <td>{{i}}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+          
+        </tbody>
+      </table>
+      
+    
+</div>
+<button onclick="print()" type="button" class="btn btn-success">Print Report</button>
+
+<script>
+    function print() {
+        var divContents = document.getElementById("content").innerHTML;
+        var a = window.open();
+        a.document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">');
+        a.document.write('<html><body>');
+        a.document.write(divContents);
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
+    }
+</script>
+
+{% endblock %}
